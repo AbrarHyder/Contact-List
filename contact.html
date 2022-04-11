@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar{
+            display: flex;
+            justify-content: space-evenly;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+        }
+        #navbar a{
+            text-decoration: none;
+            font-size: 35px;
+            color: teal;
+        }
+        table,td,th {
+            border: 1px solid black;
+            text-align: left;
+        }
+        table{
+            
+            width: 500px;
+            margin: auto;
+            margin-top: 50px;
+        }
+        th.td{
+            padding: 20px;
+        }
+        thead>tr>th{
+            background-color: teal;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div> <a href="/index.html">Home page</a></div>
+        <div> <a href="/contact.html">Contact List</a></div>
+        <div> <a href="/favourites.html">Favourites</a></div>
+    </div>
+    <div>
+    <table>
+        <thead id ="tableHead"> 
+            <tr>
+                <th> Contact Name </th>
+                <th> Mobile Number </th>
+                <th> Type </th>
+                <th> Favourites </th>
+            </tr>
+        </thead>
+        <tbody id ="tableBody">
+            <tr>
+                <!-- <td> </td>
+                <td> </td>
+                <td> </td>
+                <td> </td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<script>
+    var contact = JSON.parse(localStorage.getItem("contact")) || [];
+    var FavouritesList = JSON.parse(localStorage.getItem("FavouritesList")) || [];
+
+    function displayData(contact) {
+        document.querySelector("tbody").innerHTML= " ";
+        contact.forEach(cont => {
+            var r = document.createElement("tr");
+
+            var td1 = document.createElement('td');
+            td1.innerText=cont.name;
+
+            var td2 = document.createElement('td');
+            td2.innerText=cont.number;
+
+            var td3 = document.createElement('td');
+            td3.innerText=cont.type;
+
+             var td4 = document.createElement('td');
+             td4.innerText="Favourites";
+            
+
+            td4.addEventListener("click", function() {
+                FavouritesList.push(cont);
+                localStorage.setItem("FavouritesList", JSON.stringify(FavouritesList));
+                alert("Favourites Added")
+            });
+
+            r.append(td1,td2,td3,td4);
+            document.querySelector("tbody").append(r);
+        });
+        // console.log(displayData)
+
+    }
+    // window.addEventListener("load", function(){
+    //      displayData(contact)
+    //  });
+</script>
+</html>

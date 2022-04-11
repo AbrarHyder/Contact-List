@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #navbar{
+            display: flex;
+            justify-content: space-evenly;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+        }
+        #navbar a{
+            text-decoration: none;
+            font-size: 35px;
+            color: teal;
+        }
+        input, select{
+            display: block;
+            font-size: 20px;
+            margin: 10px;
+            
+
+        }
+        #form{
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+            width: 350px;
+            margin: 2% auto;
+            padding: 2%;
+        }
+        #submitButton{
+            margin: auto;
+            width: 60%;
+            background-color: teal;
+            border:none;
+            border-radius: 10px;
+        }
+        
+
+        
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <div> <a href="/index.html">Home page</a></div>
+        <div> <a href="/contact.html">Contact List</a></div>
+        <div> <a href="/favourites.html">Favourites</a></div>
+    </div>
+
+    <form id="form">
+        <h2> Enter your contact details</h2>
+        <input id="name" type="text" placeholder="Enter Name">
+        <input id="number" type="number" placeholder="Enter Mobile Number">
+        <select id="type">
+            <option value ="Friends">Friends</option>
+            <option value ="Family">Family</option>
+            <option value ="Others">Others</option>
+
+        </select>
+        <input id="submitButton" type="submit">
+    </form>
+</body>
+<script>
+    document.querySelector("form").addEventListener("submit", conFn);
+    var contactList = JSON.parse(localStorage.getItem("contactList")) || [];
+
+    function conFn(){
+        event.preventDefault();  
+            var contactObj = {
+                name: document.querySelector("#name").value,
+                number: document.querySelector("#number").value,
+                type: document.querySelector("#type").value
+            };
+            contactList.push(contactObj)
+            localStorage.setItem("contactList", JSON.stringify(contactList));
+            alert("Contact added")
+        
+    }
+    // console.log(contactList)
+</script>
+</html>
